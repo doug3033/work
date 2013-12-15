@@ -1,0 +1,159 @@
+{
+    "RendererComponent::Component": {
+        "_renderer": "DrawComponent",
+        "_entities": "[Entity]",
+        "_scene": "Scene",
+        "exec": "function(){}"
+    }
+}
+
+Sprite class:
+
+goog.provide("rokko.graphics.Sprite");
+goog.provide("rokko.graphics.AnimatedSprite");
+goog.provice("rokko.graphics.Image");
+goog.provide("rokko.graphics.ImageSequence");
+
+var Sprite = function() {
+    this.img = Image;
+    this.pos = {};
+    this.size = {};
+};
+
+Sprite.prototype.getImage = function(){};
+
+var Image = function() {
+    this.img;
+};
+
+/** @extends Sprite */
+var AnimatedSprite = function() {
+    this.frame = 0;
+    this.cell = 0;
+    this.sprites = {
+        STANDING_RIGHT: ImageSequence,
+        STANDING_LEFT: ImageSequence,
+    ...
+    };
+};
+
+Entity.prototype.EntityState = {
+    STANDING_RIGHT: 0,
+    STANDING_LEFT: 1,
+...
+};
+
+AnimatedSprite.prototype.getImage = function(){};
+
+/** @extends Image */
+var ImageSequence = function() {
+    this.img;
+    this.freq;
+    this.frames = [
+        {
+            pos: {},
+            size: {}
+        }
+    ];
+};
+
+ImageSequence.prototype.getFrame = function(){};
+
+@Factories
+
+SpriteFactory = {
+   SpriteFactory: function,
+   resources: Array.<string[rec]>,
+   sprites: Object.<string[name], Object[data]>,
+   make: function(string[name]): Sprite|null,
+   @throw Error if config file cannot built Sprite
+   loadFromJson: function(string[name], string[url], function(SpriteFactory[this])[callback], boolean[override]),
+}
+
+EntityFactory = {
+   EntityFactory: function(SpriteFactory),
+   spriteFact: SpriteFactory,
+   getSpriteFactory: function():SpriteFactory,
+   resources: Array.<string[rec]>,
+   entities: Object.<string[name], Object[data]>,
+   make: function(string[name]): Entity|null,
+   @throw Error if config file cannot built Sprite
+   loadFromJson: function(string[name], string[url], function(EntityFactory[this])[callback], boolean[override])
+}
+
+@Components
+
+GameLoopComponent: Component = {
+   GameLoopComponent: function(number[fps]),
+   isRunning: boolean,
+   fps: number,
+   exec: function(),
+   stop: function(),
+   go: function(number[time]),
+   onUpdate: function(number[time]),
+   onDraw: function(number[time]),
+}
+
+@ref goog.events.KeyCodes
+MoveComponent.KeyCode = {
+    KEY_XYZ,
+    GAMEPAD_BTN
+}
+
+MoveComponent: Component = {
+   MoveComponent: function,
+   keys: Object.<MoveComponent.KeyCode, boolean>,
+   // Register key event listeners
+   init: function,
+   exec: function(Entity[entity])
+}
+
+@Math
+
+Vec2 = {
+   Vec2: function(number[x]=, number[y]=),
+   x: number,
+   y: number,
+   add: function(Vec2|{x:number,y:number}),
+   subtract: function(Vec2|{x:number,y:number}),
+   multiply: function(number[scaler]),
+   normalize: function,
+   getComponents: function:{x:number, y:number})
+   set: function(number[x], number[y])
+}
+
+@Managers
+
+EntityManager = {
+   // @type {Object.<string, Array>} Store entities into groups. Ex: players[], enemies[], items[]
+   entities: {},
+   add: function(Entity|Array.<Entity>, string),
+   remove: function(Entity, string),
+   // @return {Array}
+   getGroup: function(string)
+}
+
+@Map
+
+Map = {
+   tiles: [{Map.Tile}/* Width x Height */],
+   TileCode: {{string: number}},
+   width: number,
+   height: number,
+   tileWidth: number,
+   tileHeight: number,
+   getTile: function(x{number}, y{number})
+}
+
+Map.Tile = {
+   texture: {Map.TileTexture},
+   code: {Map.TileCode},
+}
+
+Map.TileTexture = {
+   img: HTMLImageElement,
+   x: number,
+   y: number,
+   width: number,
+   height: number
+}
