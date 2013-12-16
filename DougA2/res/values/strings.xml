@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DougA2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello Android!</string>
+    <string name="MyButton">PressMe</string>
+    <string name="name">Name</string>
+    <string name="comment">comment</string>
+    <string name="other">other</string>
+    <string name="addComment">Comment!</string>
+    <string name="blank"></string>
+    <string name="Twitter">Twitter</string>
+	<string name="Facebook">Facebook</string>
+	<string name="Resources">Resources</string>
+
+</resources>

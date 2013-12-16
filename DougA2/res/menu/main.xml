@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/twitter"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/Twitter"/>
+    <item
+        android:id="@+id/facebook"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/Facebook"/>
+    <item
+        android:id="@+id/resources"
+        android:orderInCategory="3"
+        android:showAsAction="always"
+        android:title="@string/Resources"/>
+
+</menu>

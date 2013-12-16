@@ -1,0 +1,42 @@
+<div ng-controller="MapController" id="MapController" class="{{isActive}}">
+    <div ng-switch on="grid.cells.length">
+        <h1 ng-switch-when="0">{{title}}</h1>
+    </div>
+
+    <div class="mapGrid"
+         style="width: {{width * (grid.cellWidth + 2)}}px;
+         height: {{height * (grid.cellHeight + 2)}}px;">
+        <div ng-repeat="cell in grid.cells"
+             ng-mousedown="setMouse(true)"
+             ng-mouseup="setMouse(false)"
+             ng-mousemove="setGrid($index, false)"
+             ng-click="setGrid($index, true)"
+             class="mapCell"
+             style="width: {{grid.cellWidth}}px;
+                height: {{grid.cellHeight}}px;
+                line-height: {{grid.cellHeight}}px;
+                background: {{cell.bg}}"></div>
+    </div>
+
+    <div class="modal hide fade" id="mapDialog">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>New map settings</h3>
+        </div>
+        <div class="modal-body">
+            <p>Grid size:
+                <input type="number" ng-model="width" placeholder="X" autofocus="true" class="span2"/>
+                <input type="number" ng-model="height" placeholder="Y" class="span2"/>
+            </p>
+
+            <p>Cell size:
+                <input type="number" ng-model="grid.cellWidth" placeholder="X" autofocus="true" class="span2"/>
+                <input type="number" ng-model="grid.cellHeight" placeholder="Y" class="span2"/>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" data-dismiss="modal" ng-click="initGrid()">Continue</button>
+        </div>
+    </div>
+</div>

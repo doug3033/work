@@ -1,0 +1,56 @@
+h1 Hello Jade
+h2=title
+
+style
+	li {background: blue}
+	
+- var name = "Doug"
+- var boldname = "<b>Doug</b>"
+- var fn = function() { return "Hey Doug";};
+- var followerCount = 1
+- var users = [ {name: "joe", email: "joe@gmail.com" }, {name: "sally", email: "sally@gmail.com"}, {name: "jill", email: "jill@gmail.com"}];
+- var users2 = [ {name: "fred", email: "fred@gmail.com" }, {name: "doug", email: "doug@gmail.com"}, {name: "jill", email: "jill@gmail.com"}];
+
+include mixins
+
+ul#nav
+	li.current One
+	li #{name}
+	li Three
+	li= fn()
+		a(href="/other") Go To Other
+	li !{boldname}
+	
+p I want to put some text here....
+
+p 
+	|Some text
+	|Some more text here.
+	
+p.
+	I want some
+	text in here
+	some more text.
+	
+	
+p
+	if followerCount === 0
+		| You have no followers
+	else if followerCount === 1
+		| You have one follower
+	else
+		| You have #{followerCount} followers.
+		
+		
+ul
+	each user in users
+		li #{user.name} &lt;#{user.email}
+		
+
+
+	
+	
+ul
+	each user in users2
+		mixin userLi(user)
+	
